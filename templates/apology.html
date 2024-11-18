@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block title %} Apology {% endblock %} {% block
+main %}
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card shadow-lg border-0">
+        <div class="card-body text-center p-5">
+          <div class="mb-4">
+            <i
+              class="fas fa-exclamation-circle text-danger"
+              style="font-size: 4rem"
+            ></i>
+          </div>
+
+          <div class="alert alert-danger shadow-sm mb-4">
+            <h4 class="alert-heading mb-2">Oops!</h4>
+            <p class="mb-0">{{ message }}</p>
+          </div>
+
+          {% if show_redirect %}
+          <div class="mb-4">
+            <p class="text-muted">No accounts exist in the system.</p>
+            <a href="/" class="btn btn-primary btn-lg px-4">
+              <i class="fas fa-home"></i> Return to Main Page
+            </a>
+          </div>
+          {% endif %}
+
+          <img
+            alt="{{ top }}"
+            class="img-fluid rounded shadow-sm"
+            src="http://memegen.link/custom/{{ top | urlencode }}/{{ bottom | urlencode }}.jpg?alt=https://i.imgur.com/CsCgN7Ll.png"
+            title="{{ top }}"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

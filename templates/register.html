@@ -1,0 +1,56 @@
+{% extends "layout.html" %} {% block title %}Register{% endblock %} {% block
+main %}
+<div class="auth-container">
+  <div class="auth-header">
+    <i class="fas fa-user-plus fa-3x mb-3"></i>
+    <h2>Register</h2>
+  </div>
+
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <div class="flash-messages flash-success">{{ message }}</div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <form action="/register" method="post">
+    <div class="mb-3">
+      <input
+        autocomplete="off"
+        autofocus
+        class="form-control"
+        name="username"
+        placeholder="Username"
+        type="text"
+      />
+    </div>
+    <div class="mb-3">
+      <input
+        class="form-control"
+        name="password"
+        placeholder="Password"
+        type="password"
+      />
+    </div>
+    <div class="mb-3">
+      <input
+        class="form-control"
+        name="confirmation"
+        placeholder="Confirm Password"
+        type="password"
+      />
+    </div>
+    <div class="mb-3">
+      <select class="form-control" name="role">
+        <option value="" disabled selected>Select Role</option>
+        {% for role in roles %}
+        <option value="{{ role }}">{{ role|title }}</option>
+        {% endfor %}
+      </select>
+    </div>
+    <button class="btn btn-primary" type="submit">Register</button>
+  </form>
+
+  <div class="auth-links">
+    <p>Already have an account? <a href="/login">Login here</a></p>
+  </div>
+</div>
+{% endblock %}

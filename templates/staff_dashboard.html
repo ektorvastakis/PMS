@@ -1,0 +1,75 @@
+{% extends "layout.html" %} {% block title %} {% if user_role == "manager"
+%}Manager {% elif user_role == "guard" %}Guard {% else %}Lobby{% endif %}
+Dashboard {% endblock %} {% block main %}
+<div class="container mt-4">
+  <div class="row justify-content-center">
+    <div class="col-lg-10">
+      <!-- Dashboard Header -->
+      <div class="text-center mb-4">
+        <i
+          class="fas {% if user_role == 'manager' %}fa-user-tie{% elif user_role == 'guard' %}fa-user-shield{% else %}fa-concierge-bell{% endif %} fa-3x text-primary mb-3"
+        ></i>
+        <h2 class="text-primary">{{ user_role|title }} Dashboard</h2>
+      </div>
+
+      <!-- Current Time and Date Selection -->
+      <div class="row mb-4">
+        <div class="col-md-6">
+          <div class="alert alert-info shadow-sm h-100">
+            <div class="d-flex align-items-center">
+              <i class="fas fa-clock fa-2x me-3"></i>
+              <div>
+                <h5 class="mb-0">Current Time</h5>
+                <p class="mb-0" id="currentTime">{{ current_time }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {% if user_role == "manager" %}
+        <div class="col-md-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body text-center">
+              <a href="/reserve" class="btn btn-primary btn-lg w-100">
+                <i class="fas fa-plus-circle me-2"></i>Reserve Slot
+              </a>
+            </div>
+          </div>
+        </div>
+        {% endif %} {% if user_role == "lobby" %}
+        <div class="col-md-6">
+          <div class="card shadow-sm h-100">
+            <div class="card-body">
+              <form
+                action="/dashboard"
+                method="get"
+                class="d-flex align-items-center"
+              >
+                <div class="input-group">
+                  <span class="input-group-text">
+                    <i class="fas fa-calendar-alt"></i>
+                  </span>
+                  <input
+                    type="date"
+                    class="form-control"
+                    name="date"
+                    value="{{ selected_date }}"
+                    min="{{ current_time.split()[0] }}"
+                    onchange="this.form.submit()"
+                  />
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        {% endif %}
+      </div>
+
+      <!-- Bookings Table -->
+      {% include 'bookings_table.html' %}
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}

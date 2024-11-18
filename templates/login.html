@@ -1,0 +1,46 @@
+{% extends "layout.html" %} {% block title %}Login{% endblock %} {% block main
+%}
+<div class="auth-container">
+  <div class="auth-header text-center">
+    <i class="fas fa-parking fa-4x mb-3 text-primary"></i>
+    <h1 class="mb-4">Welcome to Parking Management System</h1>
+    <h3 class="text-muted mb-4">Please login to continue</h3>
+  </div>
+
+  {% with messages = get_flashed_messages() %} {% if messages %} {% for message
+  in messages %}
+  <div class="flash-messages flash-success">{{ message }}</div>
+  {% endfor %} {% endif %} {% endwith %}
+
+  <form action="/login" method="post">
+    <div class="form-group mb-3">
+      <input
+        class="form-control form-control-lg"
+        autocomplete="off"
+        autofocus
+        name="username"
+        placeholder="Username"
+        type="text"
+      />
+    </div>
+    <div class="form-group mb-4">
+      <input
+        class="form-control form-control-lg"
+        name="password"
+        placeholder="Password"
+        type="password"
+      />
+    </div>
+    <button class="btn btn-primary btn-lg w-100 mb-3" type="submit">
+      Login
+    </button>
+  </form>
+
+  <div class="auth-links text-center">
+    <p class="mb-2">
+      Don't have an account? <a href="/register">Register here</a>
+    </p>
+    <p>First time setup? <a href="/settings">Configure system</a></p>
+  </div>
+</div>
+{% endblock %}
